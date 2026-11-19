@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="120" fill="#FFF3B0" />
+  <circle cx="256" cy="256" r="200" fill="#FFFDF7" stroke="#F8C8DC" stroke-width="14" stroke-dasharray="20 14" />
+  <!-- Pocket Shape -->
+  <path d="M136 200 H376 V310 C376 376 322 410 256 410 C190 410 136 376 136 310 Z" fill="#F8C8DC" stroke="#5C4742" stroke-width="14" stroke-linejoin="round" />
+  <path d="M156 225 H356" stroke="#FFFDF7" stroke-width="8" stroke-dasharray="12 10" stroke-linecap="round" />
+  <!-- Cute Ribbon -->
+  <path d="M256 175 C220 140 185 160 205 190 C220 205 245 190 256 182 C267 190 292 205 307 190 C327 160 292 140 256 175 Z" fill="#FF8FAB" stroke="#5C4742" stroke-width="10" stroke-linejoin="round" />
+  <circle cx="256" cy="180" r="14" fill="#FFE066" stroke="#5C4742" stroke-width="8" />
+  <!-- Heart inside pocket -->
+  <path d="M256 335 C256 335 210 302 210 274 C210 258 223 248 237 248 C246 248 253 253 256 260 C259 253 266 248 275 248 C289 248 302 258 302 274 C302 302 256 335 256 335 Z" fill="#FFFDF7" />
+  <!-- Sparkles -->
+  <path d="M110 140 L116 156 L132 162 L116 168 L110 184 L104 168 L88 162 L104 156 Z" fill="#FF8FAB" />
+  <path d="M402 130 L406 142 L418 146 L406 150 L402 162 L398 150 L386 146 L398 142 Z" fill="#FF8FAB" />
+</svg>

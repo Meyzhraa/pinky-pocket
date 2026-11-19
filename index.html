@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#FFF3B0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Pinky Pocket – My Money Diary</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <!-- Google Fonts: Quicksand & Nunito (Fallback ke system sans-serif saat offline pertama kali) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-badge">
+          <span class="ribbon-icon">🎀</span>
+          <div>
+            <h1 class="app-title">Pinky Pocket</h1>
+            <p class="app-tagline">little diary of my money ♡</p>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="btn-install-pwa" class="btn-install hidden" title="Install Aplikasi">📲 Install</button>
+        <span class="doodle-sparkle">✿</span>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- ==================== TAB 1: HOME / DASHBOARD ==================== -->
+      <section id="view-home" class="view-section active">
+        <!-- Greeting Banner -->
+        <div class="greeting-card">
+          <div>
+            <h2 id="greeting-text">Hi, pretty! ♡</h2>
+            <p id="today-date-text" class="date-subtitle">Kamis, 19 November 2026</p>
+          </div>
+          <div class="doodle-art" aria-hidden="true">🌼✨</div>
+        </div>
+
+        <!-- Total Balance Hero Card -->
+        <div class="balance-hero-card">
+          <div class="balance-header">
+            <span>Total Saldo Saat Ini</span>
+            <span class="pill-badge">Active Pocket 👛</span>
+          </div>
+          <div id="home-total-balance" class="balance-amount">Rp 0</div>
+          
+          <div class="monthly-mini-grid">
+            <div class="mini-stat income">
+              <span class="mini-label">🌸 Masuk Bulan Ini</span>
+              <strong id="home-month-income">Rp 0</strong>
+            </div>
+            <div class="mini-stat expense">
+              <span class="mini-label">🌷 Keluar Bulan Ini</span>
+              <strong id="home-month-expense">Rp 0</strong>
+            </div>
+          </div>
+
+          <div class="month-net-bar">
+            <span>Sisa Uang Bulan Ini:</span>
+            <strong id="home-month-net">Rp 0</strong>
+          </div>
+        </div>
+
+        <!-- Primary Quick Action Buttons -->
+        <div class="quick-actions">
+          <button id="btn-quick-in" class="btn-action btn-in">
+            <span class="btn-icon">+</span>
+            <span>Money In</span>
+          </button>
+          <button id="btn-quick-out" class="btn-action btn-out">
+            <span class="btn-icon">−</span>
+            <span>Money Out</span>
+          </button>
+        </div>
+
+        <!-- Today's Summary Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3>☀️ Ringkasan Hari Ini</h3>
+            <span id="today-tx-count" class="badge-soft">0 catatan</span>
+          </div>
+          <div class="today-summary-row">
+            <div class="today-box in">
+              <small>Pemasukan Hari Ini</small>
+              <p id="home-today-income">Rp 0</p>
+            </div>
+            <div class="today-box out">
+              <small>Pengeluaran Hari Ini</small>
+              <p id="home-today-expense">Rp 0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Income vs Expense Chart -->
+        <div class="card">
+          <div class="card-header">
+            <h3>📊 Grafik Bulan Ini</h3>
+            <span id="home-chart-month-label" class="badge-soft">Bulan Ini</span>
+          </div>
+          <div id="home-chart-container" class="visual-chart-box"></div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="card">
+          <div class="card-header">
+            <h3>📝 Transaksi Terbaru</h3>
+            <button id="btn-see-all-diary" class="btn-link">Lihat Semua →</button>
+          </div>
+          <div id="home-recent-list" class="tx-list"></div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: MONEY DIARY / RIWAYAT ==================== -->
+      <section id="view-diary" class="view-section">
+        <div class="section-title-bar">
+          <h2>📖 Money Diary</h2>
+          <span id="diary-total-count" class="badge-soft">0 catatan</span>
+        </div>
+
+        <!-- Filter & Search Box -->
+        <div class="card filter-card">
+          <div class="search-box">
+            <input type="text" id="diary-search" placeholder="Cari transaksi (cth: matcha, gaji)..." />
+          </div>
+          
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="diary-filter-category">Kategori</label>
+              <select id="diary-filter-category">
+                <option value="ALL">Semua Kategori</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="diary-filter-type">Jenis</label>
+              <select id="diary-filter-type">
+                <option value="ALL">Semua</option>
+                <option value="income">Uang Masuk (+)</option>
+                <option value="expense">Uang Keluar (−)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-grid">
+            <div class="form-group">
+              <label>Dari Tanggal</label>
+              <div class="date-btn-wrapper">
+                <button type="button" class="date-trigger-btn">
+                  <span id="label-diary-start">Pilih</span>
+                  <span class="cal-icon">📅</span>
+                </button>
+                <input type="date" id="diary-date-start" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Sampai Tanggal</label>
+              <div class="date-btn-wrapper">
+                <button type="button" class="date-trigger-btn">
+                  <span id="label-diary-end">Pilih</span>
+                  <span class="cal-icon">📅</span>
+                </button>
+                <input type="date" id="diary-date-end" />
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="btn-reset-filters" class="btn-secondary btn-sm">Reset Filter</button>
+          </div>
+        </div>
+
+        <!-- Grouped Daily Transactions Container -->
+        <div id="diary-grouped-list" class="diary-groups"></div>
+      </section>
+
+      <!-- ==================== TAB 3: REKAP KEUANGAN / STATISTICS ==================== -->
+      <section id="view-stats" class="view-section">
+        <div class="section-title-bar">
+          <h2>🌷 Rekap Keuangan</h2>
+          <span class="doodle-sparkle">♡</span>
+        </div>
+
+        <!-- Period Tabs -->
+        <div class="period-tabs" role="tablist">
+          <button class="period-tab active" data-period="daily">Harian</button>
+          <button class="period-tab" data-period="weekly">Mingguan</button>
+          <button class="period-tab" data-period="monthly">Bulanan</button>
+          <button class="period-tab" data-period="yearly">Tahunan</button>
+        </div>
+
+        <!-- Dynamic Date Selector for Each Period -->
+        <div class="card stats-filter-card">
+          <div id="stats-control-daily" class="stats-control">
+            <label>Pilih Tanggal:</label>
+            <div class="date-btn-wrapper">
+              <button type="button" class="date-trigger-btn">
+                <span id="label-stats-daily">Hari Ini</span>
+                <span class="cal-icon">📅</span>
+              </button>
+              <input type="date" id="stats-input-daily" />
+            </div>
+          </div>
+
+          <div id="stats-control-weekly" class="stats-control hidden">
+            <label>Pilih Minggu:</label>
+            <div class="date-btn-wrapper">
+              <button type="button" class="date-trigger-btn">
+                <span id="label-stats-weekly">Minggu Ini</span>
+                <span class="cal-icon">📅</span>
+              </button>
+              <input type="date" id="stats-input-weekly" />
+            </div>
+            <small id="stats-week-range-label" class="helper-text"></small>
+          </div>
+
+          <div id="stats-control-monthly" class="stats-control hidden">
+            <label>Pilih Bulan:</label>
+            <div class="date-btn-wrapper">
+              <button type="button" class="date-trigger-btn">
+                <span id="label-stats-monthly">Bulan Ini</span>
+                <span class="cal-icon">🗓️</span>
+              </button>
+              <input type="month" id="stats-input-monthly" />
+            </div>
+          </div>
+
+          <div id="stats-control-yearly" class="stats-control hidden">
+            <label for="stats-input-yearly">Pilih Tahun:</label>
+            <select id="stats-input-yearly"></select>
+          </div>
+        </div>
+
+        <!-- Stats Dynamic Content Area -->
+        <div id="stats-content-area"></div>
+      </section>
+
+      <!-- ==================== TAB 4: WALLET & SETTINGS ==================== -->
+      <section id="view-wallet" class="view-section">
+        <div class="section-title-bar">
+          <h2>👛 Wallet & Settings</h2>
+          <span class="doodle-sparkle">✿</span>
+        </div>
+
+        <!-- Initial Balance Setup -->
+        <div class="card">
+          <h3>💰 Pengaturan Saldo Awal</h3>
+          <p class="card-desc">Saldo awal adalah modal uang sebelum transaksi pertama dicatat. Saldo berjalan otomatis melanjutkan dari bulan ke bulan.</p>
+          <form id="form-initial-balance" class="inline-form">
+            <div class="form-group">
+              <label for="input-initial-balance">Nominal Saldo Awal (Rp)</label>
+              <input type="number" id="input-initial-balance" min="0" step="100" placeholder="0" required />
+            </div>
+            <button type="submit" class="btn-primary">Simpan Saldo Awal</button>
+          </form>
+        </div>
+
+        <!-- Sample Data Helper -->
+        <div class="card">
+          <h3>🎀 Mode Contoh (Sample Data)</h3>
+          <p class="card-desc">Ingin melihat tampilan diary dengan contoh catatan? Kamu bisa memuat contoh data atau menghapusnya kapan saja tanpa merusak datamu.</p>
+          <div class="button-stack">
+            <button id="btn-load-sample" class="btn-secondary">✨ Muat Contoh Data Diary</button>
+            <button id="btn-clear-sample" class="btn-outline-danger hidden">🧹 Hapus Contoh Data</button>
+          </div>
+        </div>
+
+        <!-- Export & Backup -->
+        <div class="card">
+          <h3>📦 Export & Backup Data</h3>
+          <p class="card-desc">Simpan cadangan datamu secara berkala agar aman meskipun cache browser dibersihkan.</p>
+          <div class="button-stack">
+            <button id="btn-export-csv" class="btn-primary">📊 Export CSV (Buka di Excel)</button>
+            <button id="btn-export-json" class="btn-secondary">💾 Export Backup JSON</button>
+          </div>
+        </div>
+
+        <!-- Restore Data -->
+        <div class="card">
+          <h3>📥 Restore Data dari Backup</h3>
+          <p class="card-desc">Pilih file backup <code>.json</code> Pinky Pocket untuk memulihkan seluruh transaksi dan saldo awal.</p>
+          <div class="file-upload-box">
+            <input type="file" id="input-restore-json" accept=".json,application/json" />
+            <button id="btn-restore-json" class="btn-secondary">📂 Pulihkan Backup JSON</button>
+          </div>
+        </div>
+
+        <!-- Storage Info & Reset -->
+        <div class="card info-card">
+          <h3>🔒 Informasi Penyimpanan Lokal</h3>
+          <ul class="info-list">
+            <li>Semua data tersimpan 100% di <strong>LocalStorage</strong> perangkat ini.</li>
+            <li>Data tetap aman saat browser ditutup, di-refresh, atau HP dimatikan.</li>
+            <li>Tidak ada data yang dikirim ke server mana pun.</li>
+            <li>Total transaksi tersimpan: <strong id="wallet-tx-count">0</strong> catatan.</li>
+          </ul>
+          <hr class="divider" />
+          <button id="btn-reset-all" class="btn-danger">🗑️ Reset Seluruh Data</button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (4 Menus) -->
+    <nav class="bottom-nav" aria-label="Navigasi Utama">
+      <button class="nav-item active" data-target="view-home">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" data-target="view-diary">
+        <span class="nav-icon">📖</span>
+        <span class="nav-label">Diary</span>
+      </button>
+      <button class="nav-item" data-target="view-stats">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Statistics</span>
+      </button>
+      <button class="nav-item" data-target="view-wallet">
+        <span class="nav-icon">👛</span>
+        <span class="nav-label">Wallet</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ==================== MODAL: TAMBAH / EDIT TRANSAKSI ==================== -->
+  <div id="tx-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 id="modal-title">✨ Catat Transaksi</h3>
+        <button id="btn-close-modal" class="btn-close" aria-label="Tutup">✕</button>
+      </div>
+
+      <form id="tx-form">
+        <input type="hidden" id="tx-id" />
+
+        <!-- Type Switcher -->
+        <div class="type-switch">
+          <button type="button" id="type-btn-expense" class="type-option active-out" data-type="expense">
+            − Money Out
+          </button>
+          <button type="button" id="type-btn-income" class="type-option" data-type="income">
+            + Money In
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label for="tx-amount">Nominal (Rp) *</label>
+          <input type="number" id="tx-amount" min="1" step="any" placeholder="Contoh: 25000" required />
+        </div>
+
+        <div class="form-group">
+          <label for="tx-name">Nama Transaksi *</label>
+          <input type="text" id="tx-name" maxlength="80" placeholder="Contoh: Beli matcha / Gaji" required />
+          <div id="quick-suggestions" class="suggestion-chips"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="tx-category">Kategori *</label>
+          <select id="tx-category" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="tx-date">Tanggal *</label>
+          <input type="date" id="tx-date" required />
+        </div>
+
+        <div class="form-group">
+          <label>Tanggal *</label>
+          <div class="date-btn-wrapper">
+            <button type="button" class="date-trigger-btn">
+              <span id="label-tx-date">Hari Ini</span>
+              <span class="cal-icon">📅</span>
+            </button>
+            <input type="date" id="tx-date" required />
+          </div>
+        </div>
+
+        <button type="submit" id="btn-submit-tx" class="btn-primary btn-block">Simpan ke Diary ♡</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Custom Toast Notification -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

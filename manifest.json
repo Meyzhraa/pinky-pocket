@@ -1,0 +1,18 @@
+{
+  "name": "Pinky Pocket – My Money Diary",
+  "short_name": "Pinky Pocket",
+  "description": "little diary of my money ♡ Catatan keuangan pribadi yang cantik, praktis, dan offline.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFFDF7",
+  "theme_color": "#FFF3B0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512 any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
