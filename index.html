@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#FFF3B0" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>Pinky Pocket – My Money Diary</title>
+  <meta name="apple-mobile-web-app-title" content="Kliping Pocket" />
+  <title>Kliping Pocket – My Money Diary</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
-  <!-- Google Fonts: Quicksand & Nunito (Fallback ke system sans-serif saat offline pertama kali) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
@@ -18,19 +18,19 @@
 </head>
 <body>
   <div class="app-container">
-    <!-- Top Header -->
+    <!-- Top Scrapbook Header -->
     <header class="app-header">
       <div class="header-left">
         <div class="brand-badge">
-          <span class="ribbon-icon">🎀</span>
+          <span class="clip-icon">📎</span>
           <div>
-            <h1 class="app-title">Pinky Pocket</h1>
-            <p class="app-tagline">little diary of my money ♡</p>
+            <h1 class="app-title">Kliping Pocket</h1>
+            <p class="app-tagline">little paper diary of my money ♡</p>
           </div>
         </div>
       </div>
       <div class="header-right">
-        <button id="btn-install-pwa" class="btn-install hidden" title="Install Aplikasi">📲 Install</button>
+        <button id="btn-install-pwa" class="btn-install hidden" title="Taruh di Layar Utama">📲 Pasang App</button>
         <span class="doodle-sparkle">✿</span>
       </div>
     </header>
@@ -40,26 +40,27 @@
       
       <!-- ==================== TAB 1: HOME / DASHBOARD ==================== -->
       <section id="view-home" class="view-section active">
-        <!-- Greeting Banner -->
+        <!-- Greeting Memo -->
         <div class="greeting-card">
+          <div class="washi-tape"></div>
           <div>
-            <h2 id="greeting-text">Hi, pretty! ♡</h2>
+            <h2 id="greeting-text">Hi, klipingkecil! ♡</h2>
             <p id="today-date-text" class="date-subtitle">Kamis, 19 November 2026</p>
           </div>
-          <div class="doodle-art" aria-hidden="true">🌼✨</div>
+          <div class="doodle-art" aria-hidden="true">🗒️✨</div>
         </div>
 
-        <!-- Total Balance Hero Card -->
+        <!-- Total Balance Paper Card -->
         <div class="balance-hero-card">
           <div class="balance-header">
-            <span>Total Saldo Saat Ini</span>
-            <span class="pill-badge">Active Pocket 👛</span>
+            <span>Total Saldo Kantong</span>
+            <span class="pill-badge">Paper Pocket 📎</span>
           </div>
           <div id="home-total-balance" class="balance-amount">Rp 0</div>
           
           <div class="monthly-mini-grid">
             <div class="mini-stat income">
-              <span class="mini-label">🌸 Masuk Bulan Ini</span>
+              <span class="mini-label">🍀 Masuk Bulan Ini</span>
               <strong id="home-month-income">Rp 0</strong>
             </div>
             <div class="mini-stat expense">
@@ -89,8 +90,8 @@
         <!-- Today's Summary Card -->
         <div class="card">
           <div class="card-header">
-            <h3>☀️ Ringkasan Hari Ini</h3>
-            <span id="today-tx-count" class="badge-soft">0 catatan</span>
+            <h3>☀️ Kliping Hari Ini</h3>
+            <span id="today-tx-count" class="badge-soft">0 kliping</span>
           </div>
           <div class="today-summary-row">
             <div class="today-box in">
@@ -116,7 +117,7 @@
         <!-- Recent Transactions -->
         <div class="card">
           <div class="card-header">
-            <h3>📝 Transaksi Terbaru</h3>
+            <h3>🗒️ Kliping Terbaru</h3>
             <button id="btn-see-all-diary" class="btn-link">Lihat Semua →</button>
           </div>
           <div id="home-recent-list" class="tx-list"></div>
@@ -126,14 +127,15 @@
       <!-- ==================== TAB 2: MONEY DIARY / RIWAYAT ==================== -->
       <section id="view-diary" class="view-section">
         <div class="section-title-bar">
-          <h2>📖 Money Diary</h2>
-          <span id="diary-total-count" class="badge-soft">0 catatan</span>
+          <h2>📖 Paper Diary</h2>
+          <span id="diary-total-count" class="badge-soft">0 kliping</span>
         </div>
 
         <!-- Filter & Search Box -->
         <div class="card filter-card">
           <div class="search-box">
-            <input type="text" id="diary-search" placeholder="Cari transaksi (cth: matcha, gaji)..." />
+            <span class="search-icon">🔍</span>
+            <input type="text" id="diary-search" placeholder="Cari kliping (cth: matcha, kertas, gaji)..." />
           </div>
           
           <div class="filter-grid">
@@ -189,7 +191,7 @@
       <section id="view-stats" class="view-section">
         <div class="section-title-bar">
           <h2>🌷 Rekap Keuangan</h2>
-          <span class="doodle-sparkle">♡</span>
+          <span class="doodle-sparkle">📎</span>
         </div>
 
         <!-- Period Tabs -->
@@ -256,7 +258,7 @@
         <!-- Initial Balance Setup -->
         <div class="card">
           <h3>💰 Pengaturan Saldo Awal</h3>
-          <p class="card-desc">Saldo awal adalah modal uang sebelum transaksi pertama dicatat. Saldo berjalan otomatis melanjutkan dari bulan ke bulan.</p>
+          <p class="card-desc">Saldo awal adalah modal uang sebelum kliping pertama dicatat. Saldo berjalan otomatis melanjutkan dari bulan ke bulan.</p>
           <form id="form-initial-balance" class="inline-form">
             <div class="form-group">
               <label for="input-initial-balance">Nominal Saldo Awal (Rp)</label>
@@ -269,17 +271,17 @@
         <!-- Sample Data Helper -->
         <div class="card">
           <h3>🎀 Mode Contoh (Sample Data)</h3>
-          <p class="card-desc">Ingin melihat tampilan diary dengan contoh catatan? Kamu bisa memuat contoh data atau menghapusnya kapan saja tanpa merusak datamu.</p>
+          <p class="card-desc">Ingin melihat tampilan jurnal dengan contoh catatan? Kamu bisa memuat contoh data atau menghapusnya kapan saja.</p>
           <div class="button-stack">
-            <button id="btn-load-sample" class="btn-secondary">✨ Muat Contoh Data Diary</button>
-            <button id="btn-clear-sample" class="btn-outline-danger hidden">🧹 Hapus Contoh Data</button>
+            <button id="btn-load-sample" class="btn-secondary">✨ Muat Contoh Kliping</button>
+            <button id="btn-clear-sample" class="btn-outline-danger hidden">🧹 Hapus Contoh Kliping</button>
           </div>
         </div>
 
         <!-- Export & Backup -->
         <div class="card">
           <h3>📦 Export & Backup Data</h3>
-          <p class="card-desc">Simpan cadangan datamu secara berkala agar aman meskipun cache browser dibersihkan.</p>
+          <p class="card-desc">Simpan cadangan datamu secara berkala agar aman meskipun cache browser HP dibersihkan.</p>
           <div class="button-stack">
             <button id="btn-export-csv" class="btn-primary">📊 Export CSV (Buka di Excel)</button>
             <button id="btn-export-json" class="btn-secondary">💾 Export Backup JSON</button>
@@ -289,7 +291,7 @@
         <!-- Restore Data -->
         <div class="card">
           <h3>📥 Restore Data dari Backup</h3>
-          <p class="card-desc">Pilih file backup <code>.json</code> Pinky Pocket untuk memulihkan seluruh transaksi dan saldo awal.</p>
+          <p class="card-desc">Pilih file backup <code>.json</code> Kliping Pocket untuk memulihkan seluruh transaksi dan saldo awal.</p>
           <div class="file-upload-box">
             <input type="file" id="input-restore-json" accept=".json,application/json" />
             <button id="btn-restore-json" class="btn-secondary">📂 Pulihkan Backup JSON</button>
@@ -302,8 +304,8 @@
           <ul class="info-list">
             <li>Semua data tersimpan 100% di <strong>LocalStorage</strong> perangkat ini.</li>
             <li>Data tetap aman saat browser ditutup, di-refresh, atau HP dimatikan.</li>
-            <li>Tidak ada data yang dikirim ke server mana pun.</li>
-            <li>Total transaksi tersimpan: <strong id="wallet-tx-count">0</strong> catatan.</li>
+            <li>Bisa dipasang di halaman utama HP & dipakai tanpa kuota internet.</li>
+            <li>Total kliping tersimpan: <strong id="wallet-tx-count">0</strong> catatan.</li>
           </ul>
           <hr class="divider" />
           <button id="btn-reset-all" class="btn-danger">🗑️ Reset Seluruh Data</button>
@@ -337,7 +339,7 @@
   <div id="tx-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
     <div class="modal-sheet">
       <div class="modal-header">
-        <h3 id="modal-title">✨ Catat Transaksi</h3>
+        <h3 id="modal-title">📎 Catat Kliping Baru</h3>
         <button id="btn-close-modal" class="btn-close" aria-label="Tutup">✕</button>
       </div>
 
@@ -371,11 +373,6 @@
         </div>
 
         <div class="form-group">
-          <label for="tx-date">Tanggal *</label>
-          <input type="date" id="tx-date" required />
-        </div>
-
-        <div class="form-group">
           <label>Tanggal *</label>
           <div class="date-btn-wrapper">
             <button type="button" class="date-trigger-btn">
@@ -386,7 +383,12 @@
           </div>
         </div>
 
-        <button type="submit" id="btn-submit-tx" class="btn-primary btn-block">Simpan ke Diary ♡</button>
+        <div class="form-group">
+          <label for="tx-note">Catatan Kliping (Opsional)</label>
+          <textarea id="tx-note" rows="2" maxlength="200" placeholder="Tulis potongan cerita kecil di sini... 📎♡"></textarea>
+        </div>
+
+        <button type="submit" id="btn-submit-tx" class="btn-primary btn-block">Tempel ke Diary 📎♡</button>
       </form>
     </div>
   </div>

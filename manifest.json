@@ -1,7 +1,7 @@
 {
-  "name": "Pinky Pocket – My Money Diary",
-  "short_name": "Pinky Pocket",
-  "description": "little diary of my money ♡ Catatan keuangan pribadi yang cantik, praktis, dan offline.",
+  "name": "Kliping Pocket – My Money Diary",
+  "short_name": "Kliping Pocket",
+  "description": "little paper diary of my money 📎♡ Catatan keuangan ala kliping jurnal harian.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFFDF7",

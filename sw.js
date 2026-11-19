@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pinky-pocket-v1';
+const CACHE_NAME = 'kliping-pocket-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -8,43 +8,34 @@ const ASSETS_TO_CACHE = [
   './icon.svg'
 ];
 
-// Install Service Worker & Cache Assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
   );
   self.skipWaiting();
 });
 
-// Activate & Clean Old Caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-      );
-    })
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    )
   );
   self.clients.claim();
 });
 
-// Fetch Offline First / Network Fallback
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
       return fetch(event.request)
-        .then((networkResponse) => {
+        .then((res) => {
           return caches.open(CACHE_NAME).then((cache) => {
             if (event.request.url.startsWith('http')) {
-              cache.put(event.request, networkResponse.clone());
+              cache.put(event.request, res.clone());
             }
-            return networkResponse;
+            return res;
           });
         })
         .catch(() => {
